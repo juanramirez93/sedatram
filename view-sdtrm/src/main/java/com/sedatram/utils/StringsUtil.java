@@ -31,7 +31,7 @@ public class StringsUtil {
             "El número de telefono fijo debe tener 8 dígitos incluyendo el indicativo de la " +
                     "ciudad";
     public static final String CELLPHONE_ERROR_MESSAGE =
-            "El n�mero de celular debe tener 10 dígitos";
+            "El número de celular debe tener 10 dígitos";
     public static final String SELECT_REGISTER = "Seleccione un registro";
     public static final String DELETE = "Eliminar";
     public static final String SEND_EMAIL = "Enviar e-mail";

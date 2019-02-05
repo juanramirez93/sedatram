@@ -22,7 +22,11 @@ import java.util.ArrayList;
 
 public class DataPanelNaturalCustomer extends DataPanelAbstract<Person> {
 
-    private JComboBox<String> typeDocumentBox;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JComboBox<String> typeDocumentBox;
     private JTextField identificationField;
     private JTextField firstNameField;
     private JTextField lastNameField;

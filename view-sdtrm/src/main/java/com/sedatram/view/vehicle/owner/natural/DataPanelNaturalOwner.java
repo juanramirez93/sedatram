@@ -16,7 +16,11 @@ import java.util.ArrayList;
 
 public class DataPanelNaturalOwner extends DataPanelAbstract<Person> {
 
-    private CENaturalOwner parent;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private CENaturalOwner parent;
     private JComboBox<String> typeDocumentBox;
     private JTextField identificationField;
     private JTextField firstNameField;

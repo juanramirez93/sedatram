@@ -224,4 +224,36 @@ public class Person {
     public void setFormalities(List<Formality> formalities) {
         this.formalities = formalities;
     }
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getEditedBy() {
+		return editedBy;
+	}
+
+	public void setEditedBy(String editedBy) {
+		this.editedBy = editedBy;
+	}
+
+	public Date getEditedAt() {
+		return editedAt;
+	}
+
+	public void setEditedAt(Date editedAt) {
+		this.editedAt = editedAt;
+	}
 }

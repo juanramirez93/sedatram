@@ -5,7 +5,12 @@ import com.sedatram.view.abstract_view.TableModelAbstract;
 
 public class TableModelCustomer extends TableModelAbstract<Person> {
 
-    public TableModelCustomer(String[] columns) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public TableModelCustomer(String[] columns) {
         super(columns);
     }
 

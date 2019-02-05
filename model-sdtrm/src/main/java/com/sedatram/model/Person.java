@@ -256,4 +256,9 @@ public class Person {
 	public void setEditedAt(Date editedAt) {
 		this.editedAt = editedAt;
 	}
+
+	public Buyer asBuyer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

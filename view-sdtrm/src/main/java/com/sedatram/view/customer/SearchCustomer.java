@@ -1,15 +1,25 @@
 package com.sedatram.view.customer;
+import java.util.List;
+
 import com.sedatram.controller.PersonController;
 import com.sedatram.model.Person;
 import com.sedatram.view.abstract_view.MainAbstract;
 import com.sedatram.view.abstract_view.SearchAbstract;
 
-import java.util.List;
-
 public class SearchCustomer extends SearchAbstract<Person> {
 
-    public SearchCustomer(MainAbstract<Person> parent) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public SearchCustomer(MainAbstract<Person> parent) {
         super(parent);
+    }
+
+    @Override
+    public List<Person> filter(List<Person> people) {
+        return null;
     }
 
     @Override
@@ -29,10 +39,5 @@ public class SearchCustomer extends SearchAbstract<Person> {
 
     @Override
     protected void setFilterPanel() {
-    }
-
-    @Override
-    public List<Person> filter(List<Person> people) {
-        return null;
     }
 }

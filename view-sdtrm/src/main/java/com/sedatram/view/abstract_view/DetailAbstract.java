@@ -1,13 +1,20 @@
 package com.sedatram.view.abstract_view;
-import com.sedatram.utils.StringsUtil;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import com.sedatram.utils.StringsUtil;
+
 public abstract class DetailAbstract<T> extends JFrame implements ActionListener {
-    protected JButton backButton;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected JButton backButton;
     protected JButton deleteButton;
     protected JButton editButton;
     protected JButton recordsButton;
@@ -19,41 +26,12 @@ public abstract class DetailAbstract<T> extends JFrame implements ActionListener
 
     protected T data;
 
-    public abstract void setDataPanel(T t);
-
-    public abstract void editAction();
-
-    protected abstract void deleteAction();
-
     public DetailAbstract(MainAbstract<T> parent, String title, T t) {
         super("Detalles " + title);
         this.parent = parent;
         this.data = t;
         initialize();
         initializeLayout();
-    }
-
-    private void initializeLayout() {
-        this.setLayout(new BorderLayout());
-        this.add(dataPanel, BorderLayout.CENTER);
-        buttonPanel.add(backButton);
-        buttonPanel.add(deleteButton);
-        buttonPanel.add(editButton);
-        buttonPanel.add(recordsButton);
-        this.add(buttonPanel, BorderLayout.SOUTH);
-    }
-
-    private void initialize() {
-        buttonPanel = new JPanel();
-        editButton = new JButton(StringsUtil.EDIT);
-        editButton.addActionListener(this);
-        deleteButton = new JButton(StringsUtil.DELETE);
-        deleteButton.addActionListener(this);
-        backButton = new JButton(StringsUtil.BACK);
-        backButton.addActionListener(this);
-        recordsButton = new JButton(StringsUtil.RECORDS);
-        recordsButton.addActionListener(this);
-        setDataPanel(data);
     }
 
     @Override
@@ -69,5 +47,34 @@ public abstract class DetailAbstract<T> extends JFrame implements ActionListener
         }
     }
 
+    protected abstract void deleteAction();
+
+    public abstract void editAction();
+
+    private void initialize() {
+        buttonPanel = new JPanel();
+        editButton = new JButton(StringsUtil.EDIT);
+        editButton.addActionListener(this);
+        deleteButton = new JButton(StringsUtil.DELETE);
+        deleteButton.addActionListener(this);
+        backButton = new JButton(StringsUtil.BACK);
+        backButton.addActionListener(this);
+        recordsButton = new JButton(StringsUtil.RECORDS);
+        recordsButton.addActionListener(this);
+        setDataPanel(data);
+    }
+
+    private void initializeLayout() {
+        this.setLayout(new BorderLayout());
+        this.add(dataPanel, BorderLayout.CENTER);
+        buttonPanel.add(backButton);
+        buttonPanel.add(deleteButton);
+        buttonPanel.add(editButton);
+        buttonPanel.add(recordsButton);
+        this.add(buttonPanel, BorderLayout.SOUTH);
+    }
+
     protected abstract void recordAction();
+
+    public abstract void setDataPanel(T t);
 }

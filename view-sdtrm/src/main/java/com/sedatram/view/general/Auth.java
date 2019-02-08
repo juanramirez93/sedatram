@@ -1,16 +1,26 @@
 package com.sedatram.view.general;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
 import com.sedatram.controller.SessionController;
 import com.sedatram.controller.UserController;
 import com.sedatram.model.User;
 import com.sedatram.utils.NumbersUtil;
 import com.sedatram.utils.StringsUtil;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 public class Auth extends JFrame implements ActionListener, KeyListener {
 
@@ -33,6 +43,26 @@ public class Auth extends JFrame implements ActionListener, KeyListener {
 		initializeLayout();
 		setVisible(true);
 
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == enterButton) {
+			enter();
+		}
+	}
+
+	private void enter() {
+		User user = (User) userComboBox.getSelectedItem();
+		if (user != null && StringsUtil.verifyPassword(password.getPassword(), user.getPassword().toCharArray())) {
+			SessionController.getInstance().setUserSession(user);
+			// Session.INSTANCE.setPathFolderDocs(new Config().comprobar());
+			MainFrame mainFrame = new MainFrame();
+			mainFrame.setVisible(true);
+			this.dispose();
+		} else {
+			JOptionPane.showMessageDialog(this, StringsUtil.ENTER_DENIED);
+		}
 	}
 
 	private void initializeLayout() {
@@ -67,29 +97,6 @@ public class Auth extends JFrame implements ActionListener, KeyListener {
 		password = new JPasswordField(NumbersUtil.AUTH_LENGTH);
 	}
 
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == enterButton) {
-			enter();
-		}
-	}
-
-	private void enter() {
-		User user = (User) userComboBox.getSelectedItem();
-		if (user != null && StringsUtil.verifyPassword(password.getPassword(), user.getPassword().toCharArray())) {
-			SessionController.getInstance().setUserSession(user);
-			// Session.INSTANCE.setPathFolderDocs(new Config().comprobar());
-			MainFrame mainFrame = new MainFrame();
-			mainFrame.setVisible(true);
-			this.dispose();
-		} else {
-			JOptionPane.showMessageDialog(this, StringsUtil.ENTER_DENIED);
-		}
-	}
-
-	@Override
-	public void keyTyped(KeyEvent keyEvent) {
-	}
-
 	@Override
 	public void keyPressed(KeyEvent keyEvent) {
 
@@ -99,5 +106,9 @@ public class Auth extends JFrame implements ActionListener, KeyListener {
 	public void keyReleased(KeyEvent keyEvent) {
 		capsOnLabel.setVisible(Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK));
 		this.repaint();
+	}
+
+	@Override
+	public void keyTyped(KeyEvent keyEvent) {
 	}
 }

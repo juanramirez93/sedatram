@@ -21,7 +21,14 @@ import java.util.ArrayList;
 
 public class DataPanelVehicle extends DataPanelAbstract<Vehicle> {
 
-    private JTextField plaqueField;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private JTextField plaqueField;
     private JComboBox<String> serviceComboBox;
     private JTextField typeField;
     private JTextField brandField;
@@ -48,36 +55,6 @@ public class DataPanelVehicle extends DataPanelAbstract<Vehicle> {
         if(data.getPlaque() == null || data.getPlaque().isEmpty()) {
             isNew = true;
         }
-    }
-
-    @Override
-    protected void setLabelArray() {
-        for(String s : StringsUtil.VEHICLE_FIELDS) {
-            labelArray.add(new JLabel(s));
-        }
-    }
-
-    @Override
-    protected void setComponentArray() {
-        componentArray.add(plaqueField);
-        componentArray.add(serviceComboBox);
-        componentArray.add(typeField);
-        componentArray.add(brandField);
-        componentArray.add(lineField);
-        componentArray.add(modelField);
-        componentArray.add(colorField);
-        componentArray.add(serialField);
-        componentArray.add(motorField);
-        componentArray.add(chassisField);
-        componentArray.add(vinField);
-        componentArray.add(displacementField);
-        componentArray.add(bodyworkField);
-        componentArray.add(fuelField);
-        componentArray.add(registrationField);
-        componentArray.add(transitField);
-        componentArray.add(capacityField);
-        componentArray.add(PBVField);
-        componentArray.add(axesField);
     }
 
     @Override
@@ -130,9 +107,33 @@ public class DataPanelVehicle extends DataPanelAbstract<Vehicle> {
     }
 
     @Override
+    public void fillData() {
+        if(data.getPlaque() != null) {
+            plaqueField.setText(data.getPlaque());
+            serviceComboBox.setSelectedItem(data.getService());
+            typeField.setText(data.getType());
+            brandField.setText(data.getBrand());
+            lineField.setText(data.getLine());
+            modelField.setText(data.getModel());
+            colorField.setText(data.getColor());
+            serialField.setText(data.getSerial());
+            chassisField.setText(data.getChassis());
+            vinField.setText(data.getVin());
+            displacementField.setText(data.getDisplacement());
+            bodyworkField.setText(data.getBodywork());
+            fuelField.setText(data.getGasoline());
+            registrationField.setDate(data.getRegistration());
+            transitField.setText(data.getTransit());
+            capacityField.setText(data.getCapacity());
+            PBVField.setText(data.getPBV());
+            axesField.setText(data.getAxes());
+        }
+    }
+
+    @Override
     public boolean saveData() {
         ArrayList<Component> error = new ArrayList<>();
-        if(plaqueField.equals("")) {
+        if(plaqueField.getText().equals("")) {
             error.add(plaqueField);
         }
         if(error.isEmpty()) {
@@ -172,26 +173,32 @@ public class DataPanelVehicle extends DataPanelAbstract<Vehicle> {
     }
 
     @Override
-    public void fillData() {
-        if(data.getPlaque() != null) {
-            plaqueField.setText(data.getPlaque());
-            serviceComboBox.setSelectedItem(data.getService());
-            typeField.setText(data.getType());
-            brandField.setText(data.getBrand());
-            lineField.setText(data.getLine());
-            modelField.setText(data.getModel());
-            colorField.setText(data.getColor());
-            serialField.setText(data.getSerial());
-            chassisField.setText(data.getChassis());
-            vinField.setText(data.getVin());
-            displacementField.setText(data.getDisplacement());
-            bodyworkField.setText(data.getBodywork());
-            fuelField.setText(data.getGasoline());
-            registrationField.setDate(data.getRegistration());
-            transitField.setText(data.getTransit());
-            capacityField.setText(data.getCapacity());
-            PBVField.setText(data.getPBV());
-            axesField.setText(data.getAxes());
+    protected void setComponentArray() {
+        componentArray.add(plaqueField);
+        componentArray.add(serviceComboBox);
+        componentArray.add(typeField);
+        componentArray.add(brandField);
+        componentArray.add(lineField);
+        componentArray.add(modelField);
+        componentArray.add(colorField);
+        componentArray.add(serialField);
+        componentArray.add(motorField);
+        componentArray.add(chassisField);
+        componentArray.add(vinField);
+        componentArray.add(displacementField);
+        componentArray.add(bodyworkField);
+        componentArray.add(fuelField);
+        componentArray.add(registrationField);
+        componentArray.add(transitField);
+        componentArray.add(capacityField);
+        componentArray.add(PBVField);
+        componentArray.add(axesField);
+    }
+
+    @Override
+    protected void setLabelArray() {
+        for(String s : StringsUtil.VEHICLE_FIELDS) {
+            labelArray.add(new JLabel(s));
         }
     }
 }

@@ -1,25 +1,25 @@
 package com.sedatram.view.vehicle.owner;
-import com.sedatram.controller.PersonController;
+import java.util.Arrays;
+
+import javax.swing.JOptionPane;
+
 import com.sedatram.controller.VehicleController;
 import com.sedatram.model.Person;
 import com.sedatram.model.Vehicle;
 import com.sedatram.utils.NumbersUtil;
 import com.sedatram.utils.StringsUtil;
 import com.sedatram.view.abstract_view.MainAbstract;
-import com.sedatram.view.customer.legal.CELegalCustomer;
-import com.sedatram.view.customer.legal.DetailLegalCustomer;
-import com.sedatram.view.customer.natural.CENaturalCustomer;
-import com.sedatram.view.customer.natural.DetailNaturalCustomer;
 import com.sedatram.view.vehicle.owner.legal.CELegalOwner;
 import com.sedatram.view.vehicle.owner.legal.DetailLegalOwner;
 import com.sedatram.view.vehicle.owner.natural.CENaturalOwner;
 import com.sedatram.view.vehicle.owner.natural.DetailNaturalOwner;
 
-import javax.swing.*;
-import java.util.Arrays;
-
 public class MainOwner extends MainAbstract<Person> {
-    private Vehicle vehicle;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Vehicle vehicle;
 
     public MainOwner(Vehicle vehicle) {
         super(StringsUtil.OWNERS);

@@ -42,27 +42,6 @@ public class DataPanelNaturalCustomer extends DataPanelAbstract<Person> {
     }
 
     @Override
-    protected void setLabelArray() {
-        for (String s : StringsUtil.NATURAL_CUSTOMER_FIELDS) {
-            labelArray.add(new JLabel(s));
-        }
-    }
-
-    @Override
-    protected void setComponentArray() {
-        componentArray.add(typeDocumentBox);
-        componentArray.add(identificationField);
-        componentArray.add(firstNameField);
-        componentArray.add(lastNameField);
-        componentArray.add(emailField);
-        componentArray.add(phoneField);
-        componentArray.add(cellphoneField);
-        componentArray.add(addressField);
-        componentArray.add(cityField);
-        componentArray.add(departmentField);
-    }
-
-    @Override
     protected void defineFields() {
         typeDocumentBox = new JComboBox<>(StringsUtil.NATURAL_CUSTOMER_DOCUMENTS_OPTIONS);
         identificationField = new JTextField(NumbersUtil.NAT_CUSTOMER_FIELD);
@@ -122,6 +101,22 @@ public class DataPanelNaturalCustomer extends DataPanelAbstract<Person> {
     }
 
     @Override
+    public void fillData() {
+        if (data.getIdentification() != null) {
+            typeDocumentBox.setSelectedItem(data.getTypeDocument());
+            identificationField.setText(String.valueOf(data.getIdentification()));
+            firstNameField.setText(data.getFirstName());
+            lastNameField.setText(data.getLastName());
+            emailField.setText(data.getEmail());
+            phoneField.setText(data.getPhone());
+            cellphoneField.setText(data.getCell());
+            addressField.setText(data.getAddress());
+            cityField.setText(data.getCity());
+            departmentField.setText(data.getDepartment());
+        }
+    }
+
+    @Override
     public boolean saveData() {
         ArrayList<Component> error = new ArrayList<>();
         if (typeDocumentBox.getSelectedItem().equals("")) {
@@ -172,18 +167,23 @@ public class DataPanelNaturalCustomer extends DataPanelAbstract<Person> {
     }
 
     @Override
-    public void fillData() {
-        if (data.getIdentification() != null) {
-            typeDocumentBox.setSelectedItem(data.getTypeDocument());
-            identificationField.setText(String.valueOf(data.getIdentification()));
-            firstNameField.setText(data.getFirstName());
-            lastNameField.setText(data.getLastName());
-            emailField.setText(data.getEmail());
-            phoneField.setText(data.getPhone());
-            cellphoneField.setText(data.getCell());
-            addressField.setText(data.getAddress());
-            cityField.setText(data.getCity());
-            departmentField.setText(data.getDepartment());
+    protected void setComponentArray() {
+        componentArray.add(typeDocumentBox);
+        componentArray.add(identificationField);
+        componentArray.add(firstNameField);
+        componentArray.add(lastNameField);
+        componentArray.add(emailField);
+        componentArray.add(phoneField);
+        componentArray.add(cellphoneField);
+        componentArray.add(addressField);
+        componentArray.add(cityField);
+        componentArray.add(departmentField);
+    }
+
+    @Override
+    protected void setLabelArray() {
+        for (String s : StringsUtil.NATURAL_CUSTOMER_FIELDS) {
+            labelArray.add(new JLabel(s));
         }
     }
 }

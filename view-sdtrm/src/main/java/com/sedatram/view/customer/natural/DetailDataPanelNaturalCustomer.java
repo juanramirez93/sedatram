@@ -12,7 +12,11 @@ import java.awt.event.ActionListener;
 public class DetailDataPanelNaturalCustomer extends DataPanelAbstract<Person> implements
         ActionListener {
 
-    private JTextField typeDocumentBox;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JTextField typeDocumentBox;
     private JTextField identificationField;
     private JTextField firstNameField;
     private JTextField lastNameField;
@@ -30,24 +34,10 @@ public class DetailDataPanelNaturalCustomer extends DataPanelAbstract<Person> im
     }
 
     @Override
-    protected void setLabelArray() {
-        for(String s : StringsUtil.NATURAL_CUSTOMER_FIELDS) {
-            labelArray.add(new JLabel(s));
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource().equals(sendEmailButton)){
+            Utils.sendEmail(data.getEmail());
         }
-    }
-
-    @Override
-    protected void setComponentArray() {
-        componentArray.add(typeDocumentBox);
-        componentArray.add(identificationField);
-        componentArray.add(firstNameField);
-        componentArray.add(lastNameField);
-        componentArray.add(emailPanel);
-        componentArray.add(phoneField);
-        componentArray.add(cellphoneField);
-        componentArray.add(addressField);
-        componentArray.add(cityField);
-        componentArray.add(departmentField);
     }
 
     @Override
@@ -88,11 +78,6 @@ public class DetailDataPanelNaturalCustomer extends DataPanelAbstract<Person> im
     }
 
     @Override
-    public boolean saveData() {
-        return false;
-    }
-
-    @Override
     public void fillData() {
         typeDocumentBox.setText(data.getTypeDocument());
         identificationField.setText(String.valueOf(data.getIdentification()));
@@ -107,9 +92,28 @@ public class DetailDataPanelNaturalCustomer extends DataPanelAbstract<Person> im
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource().equals(sendEmailButton)){
-            Utils.sendEmail(data.getEmail());
+    public boolean saveData() {
+        return false;
+    }
+
+    @Override
+    protected void setComponentArray() {
+        componentArray.add(typeDocumentBox);
+        componentArray.add(identificationField);
+        componentArray.add(firstNameField);
+        componentArray.add(lastNameField);
+        componentArray.add(emailPanel);
+        componentArray.add(phoneField);
+        componentArray.add(cellphoneField);
+        componentArray.add(addressField);
+        componentArray.add(cityField);
+        componentArray.add(departmentField);
+    }
+
+    @Override
+    protected void setLabelArray() {
+        for(String s : StringsUtil.NATURAL_CUSTOMER_FIELDS) {
+            labelArray.add(new JLabel(s));
         }
     }
 }

@@ -7,16 +7,16 @@ import com.sedatram.view.abstract_view.CEAbstract;
 import com.sedatram.view.abstract_view.MainAbstract;
 
 public class CEVehicle extends CEAbstract<Vehicle> {
-    public CEVehicle(
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public CEVehicle(
             MainAbstract<Vehicle> parent, Vehicle vehicle) {
         super(parent, StringsUtil.VEHICLES, vehicle);
         setSize(NumbersUtil.VEHICLE_WIDTH, NumbersUtil.VEHICLE_HEIGHT);
         setLocationRelativeTo(null);
-    }
-
-    @Override
-    public void setDataPanel(Vehicle vehicle) {
-        dataPanel = new DataPanelVehicle(vehicle);
     }
 
     @Override
@@ -27,5 +27,10 @@ public class CEVehicle extends CEAbstract<Vehicle> {
             }
             this.setVisible(false);
         }
+    }
+
+    @Override
+    public void setDataPanel(Vehicle vehicle) {
+        dataPanel = new DataPanelVehicle(vehicle);
     }
 }

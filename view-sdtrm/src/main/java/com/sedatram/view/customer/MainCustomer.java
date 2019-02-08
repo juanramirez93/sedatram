@@ -1,4 +1,9 @@
 package com.sedatram.view.customer;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+
 import com.sedatram.controller.PersonController;
 import com.sedatram.model.Person;
 import com.sedatram.utils.NumbersUtil;
@@ -10,31 +15,81 @@ import com.sedatram.view.customer.legal.DetailLegalCustomer;
 import com.sedatram.view.customer.natural.CENaturalCustomer;
 import com.sedatram.view.customer.natural.DetailNaturalCustomer;
 
-import javax.swing.*;
-import java.util.Arrays;
-import java.util.List;
-
 public class MainCustomer extends MainAbstract<Person> {
 
-    public MainCustomer() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public MainCustomer() {
         super(StringsUtil.CUSTOMERS);
         initialize();
     }
 
-    private void initialize() {
-        refreshTable(PersonController.getInstance().getAllCustomers());
-        setSize(NumbersUtil.MAIN_CUSTOMER_WIDTH, NumbersUtil.MAIN_CUSTOMER_HEIGHT);
-        setLocationRelativeTo(null);
+    @Override
+    protected void addAction() {
+        int rta = JOptionPane.showOptionDialog(null, StringsUtil.NATURAL_OR_LEGAL,
+                StringsUtil.TITLE, JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null, StringsUtil.NATURAL_LEGAL, 0);
+        if(ceFrame != null) {
+            ceFrame.dispose();
+        }
+        if(rta == 0) {
+            ceFrame = new CENaturalCustomer(this, new Person());
+        } else {
+            ceFrame = new CELegalCustomer(this, new Person());
+        }
+        ceFrame.setVisible(true);
     }
 
     @Override
-    protected void setTable() {
-        table = new TableCustomer();
+    protected void deleteAction() {
+        Person customer = table.getSelected();
+        if(customer != null) {
+            customer.setCustomer(false);
+            PersonController.getInstance().save(customer);
+            refreshTable(PersonController.getInstance().getAllCustomers());
+        }
     }
 
     @Override
-    protected void setSearch() {
-        search = new SearchCustomer(this);
+    protected void detailAction() {
+        Person customer = table.getSelected();
+        if(customer != null) {
+            if(detailFrame != null) {
+                detailFrame.dispose();
+            }
+            if(Arrays.binarySearch(StringsUtil.NATURAL_CUSTOMER_DOCUMENTS_OPTIONS,
+                    customer.getTypeDocument()) >= 0) {
+                detailFrame = new DetailNaturalCustomer(this, customer);
+            } else {
+                detailFrame = new DetailLegalCustomer(this, customer);
+            }
+            detailFrame.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, StringsUtil.SELECT_REGISTER);
+        }
+    }
+
+    @Override
+    protected void editAction() {
+        Person customer = table.getSelected();
+        if(customer != null) {
+            if(ceFrame != null) {
+                ceFrame.dispose();
+            }
+            if(Arrays.binarySearch(StringsUtil.NATURAL_CUSTOMER_DOCUMENTS_OPTIONS,
+                    customer.getTypeDocument()) >= 0) {
+                ceFrame = new CENaturalCustomer(this, customer);
+            } else {
+                ceFrame = new CELegalCustomer(this, customer);
+            }
+            ceFrame.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, StringsUtil.SELECT_REGISTER);
+        }
     }
 
     @Override
@@ -65,68 +120,19 @@ public class MainCustomer extends MainAbstract<Person> {
         }
     }
 
-    @Override
-    protected void deleteAction() {
-        Person customer = table.getSelected();
-        if(customer != null) {
-            customer.setCustomer(false);
-            PersonController.getInstance().save(customer);
-            refreshTable(PersonController.getInstance().getAllCustomers());
-        }
+    private void initialize() {
+        refreshTable(PersonController.getInstance().getAllCustomers());
+        setSize(NumbersUtil.MAIN_CUSTOMER_WIDTH, NumbersUtil.MAIN_CUSTOMER_HEIGHT);
+        setLocationRelativeTo(null);
     }
 
     @Override
-    protected void editAction() {
-        Person customer = table.getSelected();
-        if(customer != null) {
-            if(ceFrame != null) {
-                ceFrame.dispose();
-            }
-            if(Arrays.binarySearch(StringsUtil.NATURAL_CUSTOMER_DOCUMENTS_OPTIONS,
-                    customer.getTypeDocument()) >= 0) {
-                ceFrame = new CENaturalCustomer(this, customer);
-            } else {
-                ceFrame = new CELegalCustomer(this, customer);
-            }
-            ceFrame.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this, StringsUtil.SELECT_REGISTER);
-        }
+    protected void setSearch() {
+        search = new SearchCustomer(this);
     }
 
     @Override
-    protected void detailAction() {
-        Person customer = table.getSelected();
-        if(customer != null) {
-            if(detailFrame != null) {
-                detailFrame.dispose();
-            }
-            if(Arrays.binarySearch(StringsUtil.NATURAL_CUSTOMER_DOCUMENTS_OPTIONS,
-                    customer.getTypeDocument()) >= 0) {
-                detailFrame = new DetailNaturalCustomer(this, customer);
-            } else {
-                detailFrame = new DetailLegalCustomer(this, customer);
-            }
-            detailFrame.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this, StringsUtil.SELECT_REGISTER);
-        }
-    }
-
-    @Override
-    protected void addAction() {
-        int rta = JOptionPane.showOptionDialog(null, StringsUtil.NATURAL_OR_LEGAL,
-                StringsUtil.TITLE, JOptionPane.YES_NO_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null, StringsUtil.NATURAL_LEGAL, 0);
-        if(ceFrame != null) {
-            ceFrame.dispose();
-        }
-        if(rta == 0) {
-            ceFrame = new CENaturalCustomer(this, new Person());
-        } else {
-            ceFrame = new CELegalCustomer(this, new Person());
-        }
-        ceFrame.setVisible(true);
+    protected void setTable() {
+        table = new TableCustomer();
     }
 }

@@ -1,16 +1,24 @@
 package com.sedatram.view.abstract_view;
 
-import com.sedatram.utils.StringsUtil;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import com.sedatram.utils.StringsUtil;
+
 public abstract class MainAbstract<T> extends JFrame implements ActionListener {
 
-    protected JButton addButton;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected JButton addButton;
     protected JButton backButton;
     protected JButton detailButton;
     protected JButton editButton;
@@ -32,6 +40,33 @@ public abstract class MainAbstract<T> extends JFrame implements ActionListener {
         initializeLayout();
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource().equals(addButton)) {
+            addAction();
+        } else if(e.getSource().equals(backButton)) {
+            this.dispose();
+        } else if(e.getSource().equals(detailButton)) {
+            detailAction();
+        } else if(e.getSource().equals(editButton)) {
+            editAction();
+        } else if(e.getSource().equals(deleteButton)) {
+            deleteAction();
+        } else if(e.getSource().equals(exportButton)) {
+            exportAction();
+        }
+    }
+
+    protected abstract void addAction();
+
+    protected abstract void deleteAction();
+
+    protected abstract void detailAction();
+
+    protected abstract void editAction();
+
+    protected abstract void exportAction();
+
     private void initializeLayout() {
         setLayout(new BorderLayout());
         buttonPanel.setLayout(new FlowLayout());
@@ -45,10 +80,6 @@ public abstract class MainAbstract<T> extends JFrame implements ActionListener {
         add(buttonPanel, BorderLayout.SOUTH);
         add(search, BorderLayout.NORTH);
     }
-
-    protected abstract void setTable();
-
-    protected abstract void setSearch();
 
     protected void initializeVariables() {
         addButton = new JButton(StringsUtil.ADD);
@@ -71,30 +102,7 @@ public abstract class MainAbstract<T> extends JFrame implements ActionListener {
         table.updateTable();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource().equals(addButton)) {
-            addAction();
-        } else if(e.getSource().equals(backButton)) {
-            this.dispose();
-        } else if(e.getSource().equals(detailButton)) {
-            detailAction();
-        } else if(e.getSource().equals(editButton)) {
-            editAction();
-        } else if(e.getSource().equals(deleteButton)) {
-            deleteAction();
-        } else if(e.getSource().equals(exportButton)) {
-            exportAction();
-        }
-    }
+    protected abstract void setSearch();
 
-    protected abstract void exportAction();
-
-    protected abstract void deleteAction();
-
-    protected abstract void editAction();
-
-    protected abstract void detailAction();
-
-    protected abstract void addAction();
+    protected abstract void setTable();
 }

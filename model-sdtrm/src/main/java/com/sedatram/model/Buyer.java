@@ -28,108 +28,62 @@ public class Buyer {
 	public Buyer() {
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getTypeDocument() {
-		return typeDocument;
-	}
-
-	public void setTypeDocument(String typeDocument) {
-		this.typeDocument = typeDocument;
-	}
-
-	public String getIdentification() {
-		return identification;
-	}
-
-	public void setIdentification(String identification) {
-		this.identification = identification;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
 	public String getAcronym() {
 		return acronym;
-	}
-
-	public void setAcronym(String acronym) {
-		this.acronym = acronym;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getCell() {
-		return cell;
-	}
-
-	public void setCell(String cell) {
-		this.cell = cell;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public String getCell() {
+		return cell;
 	}
 
 	public String getCity() {
 		return city;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public void getDataFromPerson(Person person) {
+		this.typeDocument = person.getTypeDocument();
+		this.identification = person.getIdentification();
+		this.firstName = person.getFirstName();
+		this.lastName = person.getLastName();
+		this.acronym = person.getAcronym();
+		this.address = person.getAddress();
+		this.cell = person.getCell();
+		this.city = person.getCity();
+		this.department = person.getDepartment();
+		this.email = person.getEmail();
+		this.phone = person.getPhone();
 	}
 
 	public String getDepartment() {
 		return department;
 	}
 
-	public void setDepartment(String department) {
-		this.department = department;
+	public String getEmail() {
+		return email;
+	}
+
+	public String getFirstName() {
+		return firstName;
 	}
 
 	public List<Formality> getFormalities() {
 		return procedures;
 	}
 
-	public void setFormalities(List<Formality> procedures) {
-		this.procedures = procedures;
+	public int getId() {
+		return id;
+	}
+
+	public String getIdentification() {
+		return identification;
+	}
+
+	public String getLastName() {
+		return lastName;
 	}
 
 	public String getName() {
@@ -143,6 +97,66 @@ public class Buyer {
 			return acronym + " - " + firstName;
 		}
 		return firstName + " " + lastName;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public String getTypeDocument() {
+		return typeDocument;
+	}
+
+	public void setAcronym(String acronym) {
+		this.acronym = acronym;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public void setCell(String cell) {
+		this.cell = cell;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setFormalities(List<Formality> procedures) {
+		this.procedures = procedures;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setIdentification(String identification) {
+		this.identification = identification;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public void setTypeDocument(String typeDocument) {
+		this.typeDocument = typeDocument;
 	}
 
 }

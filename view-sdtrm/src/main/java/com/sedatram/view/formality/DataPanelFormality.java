@@ -1,5 +1,16 @@
 package com.sedatram.view.formality;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.util.Date;
+
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 import com.sedatram.controller.FormalityController;
 import com.sedatram.controller.PersonController;
 import com.sedatram.controller.VehicleController;
@@ -13,20 +24,16 @@ import com.sedatram.utils.StringsUtil;
 import com.sedatram.utils.Utils;
 import com.sedatram.view.abstract_view.CEAbstract;
 import com.sedatram.view.abstract_view.DataPanelAbstract;
-import com.sedatram.view.customer.legal.CELegalCustomer;
 import com.sedatram.view.customer.natural.CENaturalCustomer;
 import com.sedatram.view.vehicle.CEVehicle;
 import com.toedter.calendar.JDateChooser;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.util.Date;
-
 public class DataPanelFormality extends DataPanelAbstract<Formality> implements ActionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JComboBox<TypeFormality> typeBox;
 	private JDateChooser initDateChooser;
 	private JTextField customerField;
@@ -37,24 +44,9 @@ public class DataPanelFormality extends DataPanelAbstract<Formality> implements 
 	}
 
 	@Override
-	protected void setLabelArray() {
-		labelArray.add(new JLabel(StringsUtil.FORMALITY_FIELDS[0]));
-		labelArray.add(new JLabel(StringsUtil.FORMALITY_FIELDS[1]));
-	}
-
-	@Override
-	protected void setComponentArray() {
-		componentArray.clear();
-		componentArray.add(typeBox);
-		componentArray.add(initDateChooser);
-		TypeFormality typeFormality = (TypeFormality) typeBox.getSelectedItem();
-		if (typeFormality.isCustomer()) {
-			labelArray.add((new JLabel(StringsUtil.FORMALITY_FIELDS[2])));
-			componentArray.add(customerField);
-		}
-		if (typeFormality.isVehicle()) {
-			labelArray.add(new JLabel(StringsUtil.FORMALITY_FIELDS[3]));
-			componentArray.add(vehicleField);
+	public void actionPerformed(ActionEvent actionEvent) {
+		if (actionEvent.getSource().equals(typeBox)) {
+			reloadUI();
 		}
 	}
 
@@ -124,6 +116,12 @@ public class DataPanelFormality extends DataPanelAbstract<Formality> implements 
 		vehicleField.addFocusListener(new FocusListener() {
 
 			@Override
+			public void focusGained(FocusEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
 			public void focusLost(FocusEvent e) {
 				String plaque = vehicleField.getText().trim();
 				Vehicle vehicle = VehicleController.getInstance().getVehicle(plaque);
@@ -139,13 +137,18 @@ public class DataPanelFormality extends DataPanelAbstract<Formality> implements 
 					data.setVehicle(vehicle);
 				}
 			}
-
-			@Override
-			public void focusGained(FocusEvent e) {
-				// TODO Auto-generated method stub
-
-			}
 		});
+	}
+
+	@Override
+	public void fillData() {
+	}
+
+	private void reloadUI() {
+		setLabelArray();
+		setComponentArray();
+		fillData();
+		printLayout();
 	}
 
 	@Override
@@ -154,20 +157,24 @@ public class DataPanelFormality extends DataPanelAbstract<Formality> implements 
 	}
 
 	@Override
-	public void fillData() {
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent actionEvent) {
-		if (actionEvent.getSource().equals(typeBox)) {
-			reloadUI();
+	protected void setComponentArray() {
+		componentArray.clear();
+		componentArray.add(typeBox);
+		componentArray.add(initDateChooser);
+		TypeFormality typeFormality = (TypeFormality) typeBox.getSelectedItem();
+		if (typeFormality.isCustomer()) {
+			labelArray.add((new JLabel(StringsUtil.FORMALITY_FIELDS[2])));
+			componentArray.add(customerField);
+		}
+		if (typeFormality.isVehicle()) {
+			labelArray.add(new JLabel(StringsUtil.FORMALITY_FIELDS[3]));
+			componentArray.add(vehicleField);
 		}
 	}
 
-	private void reloadUI() {
-		setLabelArray();
-		setComponentArray();
-		fillData();
-		printLayout();
+	@Override
+	protected void setLabelArray() {
+		labelArray.add(new JLabel(StringsUtil.FORMALITY_FIELDS[0]));
+		labelArray.add(new JLabel(StringsUtil.FORMALITY_FIELDS[1]));
 	}
 }

@@ -1,4 +1,8 @@
 package com.sedatram.view.vehicle;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+
 import com.sedatram.controller.VehicleController;
 import com.sedatram.model.Person;
 import com.sedatram.model.Vehicle;
@@ -7,11 +11,13 @@ import com.sedatram.utils.StringsUtil;
 import com.sedatram.utils.Utils;
 import com.sedatram.view.abstract_view.MainAbstract;
 
-import javax.swing.*;
-import java.util.List;
-
 public class MainVehicle extends MainAbstract<Vehicle> {
-    public MainVehicle() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public MainVehicle() {
         super(StringsUtil.VEHICLES);
         refreshTable(VehicleController.getInstance().getAll());
         setSize(NumbersUtil.MAIN_VEHICLE_WIDTH, NumbersUtil.MAIN_VEHICLE_HEIGHT);
@@ -19,13 +25,49 @@ public class MainVehicle extends MainAbstract<Vehicle> {
     }
 
     @Override
-    protected void setTable() {
-        table = new TableVehicle();
+    protected void addAction() {
+        if(ceFrame != null) {
+            ceFrame.dispose();
+        }
+        ceFrame = new CEVehicle(this, new Vehicle());
+        ceFrame.setVisible(true);
     }
 
     @Override
-    protected void setSearch() {
-        search = new SearchVehicle(this);
+    protected void deleteAction() {
+        Vehicle vehicle = table.getSelected();
+        if(vehicle != null) {
+            VehicleController.getInstance().delete(vehicle);
+            refreshTable(VehicleController.getInstance().getAll());
+        }
+    }
+
+    @Override
+    protected void detailAction() {
+        Vehicle vehicle = table.getSelected();
+        if(vehicle != null) {
+            if(detailFrame != null) {
+                detailFrame.dispose();
+            }
+            detailFrame = new DetailVehicle(this, vehicle);
+            detailFrame.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, StringsUtil.SELECT_REGISTER);
+        }
+    }
+
+    @Override
+    protected void editAction() {
+        Vehicle vehicle = table.getSelected();
+        if(vehicle != null) {
+            if(ceFrame != null) {
+                ceFrame.dispose();
+            }
+            ceFrame = new CEVehicle(this, vehicle);
+            ceFrame.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, StringsUtil.SELECT_REGISTER);
+        }
     }
 
     @Override
@@ -77,48 +119,12 @@ public class MainVehicle extends MainAbstract<Vehicle> {
     }
 
     @Override
-    protected void deleteAction() {
-        Vehicle vehicle = table.getSelected();
-        if(vehicle != null) {
-            VehicleController.getInstance().delete(vehicle);
-            refreshTable(VehicleController.getInstance().getAll());
-        }
+    protected void setSearch() {
+        search = new SearchVehicle(this);
     }
 
     @Override
-    protected void editAction() {
-        Vehicle vehicle = table.getSelected();
-        if(vehicle != null) {
-            if(ceFrame != null) {
-                ceFrame.dispose();
-            }
-            ceFrame = new CEVehicle(this, vehicle);
-            ceFrame.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this, StringsUtil.SELECT_REGISTER);
-        }
-    }
-
-    @Override
-    protected void detailAction() {
-        Vehicle vehicle = table.getSelected();
-        if(vehicle != null) {
-            if(detailFrame != null) {
-                detailFrame.dispose();
-            }
-            detailFrame = new DetailVehicle(this, vehicle);
-            detailFrame.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this, StringsUtil.SELECT_REGISTER);
-        }
-    }
-
-    @Override
-    protected void addAction() {
-        if(ceFrame != null) {
-            ceFrame.dispose();
-        }
-        ceFrame = new CEVehicle(this, new Vehicle());
-        ceFrame.setVisible(true);
+    protected void setTable() {
+        table = new TableVehicle();
     }
 }

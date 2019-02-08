@@ -8,15 +8,15 @@ import com.sedatram.view.abstract_view.MainAbstract;
 
 public class CELegalCustomer extends CEAbstract<Person> {
 
-    public CELegalCustomer(MainAbstract<Person> parent, Person person) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public CELegalCustomer(MainAbstract<Person> parent, Person person) {
         super(parent, StringsUtil.CUSTOMERS, person);
         setSize(NumbersUtil.LEG_CUSTOMER_WIDTH, NumbersUtil.LEG_CUSTOMER_HEIGHT);
         setLocationRelativeTo(null);
-    }
-
-    @Override
-    public void setDataPanel(Person person) {
-        dataPanel = new DataPanelLegalCustomer(person);
     }
 
     @Override
@@ -27,5 +27,10 @@ public class CELegalCustomer extends CEAbstract<Person> {
             }
             this.setVisible(false);
         }
+    }
+
+    @Override
+    public void setDataPanel(Person person) {
+        dataPanel = new DataPanelLegalCustomer(person);
     }
 }

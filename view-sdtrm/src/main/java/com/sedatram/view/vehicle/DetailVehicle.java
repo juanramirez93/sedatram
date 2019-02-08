@@ -11,7 +11,11 @@ import java.awt.event.ActionEvent;
 
 public class DetailVehicle extends DetailAbstract<Vehicle> {
 
-    private JButton ownersButton;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JButton ownersButton;
 
     public DetailVehicle(
             MainAbstract<Vehicle> parent, Vehicle vehicle) {
@@ -21,30 +25,6 @@ public class DetailVehicle extends DetailAbstract<Vehicle> {
         setLocationRelativeTo(null);
     }
 
-    private void addExtraButton() {
-        ownersButton = new JButton(StringsUtil.VIEW_OWNERS);
-        ownersButton.addActionListener(this);
-        buttonPanel.add(ownersButton);
-    }
-
-    @Override
-    public void setDataPanel(Vehicle vehicle) {
-        dataPanel = new DetailDataPanelVehicle(vehicle);
-        dataPanel.setEnabled(false);
-    }
-
-    @Override
-    public void editAction() {
-    }
-
-    @Override
-    protected void deleteAction() {
-    }
-
-    @Override
-    protected void recordAction() {
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
@@ -52,5 +32,29 @@ public class DetailVehicle extends DetailAbstract<Vehicle> {
             MainOwner mainOwner = new MainOwner(data);
             mainOwner.setVisible(true);
         }
+    }
+
+    private void addExtraButton() {
+        ownersButton = new JButton(StringsUtil.VIEW_OWNERS);
+        ownersButton.addActionListener(this);
+        buttonPanel.add(ownersButton);
+    }
+
+    @Override
+    protected void deleteAction() {
+    }
+
+    @Override
+    public void editAction() {
+    }
+
+    @Override
+    protected void recordAction() {
+    }
+
+    @Override
+    public void setDataPanel(Vehicle vehicle) {
+        dataPanel = new DetailDataPanelVehicle(vehicle);
+        dataPanel.setEnabled(false);
     }
 }

@@ -1,14 +1,22 @@
 package com.sedatram.view.abstract_view;
-import com.sedatram.utils.StringsUtil;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import com.sedatram.utils.StringsUtil;
+
 public abstract class FilterAbstract<T> extends JPanel implements ActionListener {
 
-    private JLabel filtrarLabel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private JLabel filtrarLabel;
 
     protected ArrayList<JCheckBox> checkBoxes;
     protected SearchAbstract<T> mainParent;

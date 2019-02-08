@@ -80,6 +80,8 @@ public class StringsUtil {
 	public static final String[] TABLE_COLUMNS_BUYER = { "Identificación", "Nombre", "Celular", "e-Mail" };
 	public static final String BUYER = "Compradores";
 	public static final String[] NATURAL_BUYER_FIELD = {};
+	public static final String[] LEGAL_BUYER_FIELDS = { "Tipo documento", "Número", "Nombre", "Siglas", "E-mail",
+			"Teléfono", "Celular", "Dirección", "Ciudad", "Departamento" };
 
 	public static boolean verifyPassword(char[] passwordString, char[] passwordConfirmString) {
 		if (passwordString.length == passwordConfirmString.length) {

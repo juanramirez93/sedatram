@@ -1,4 +1,6 @@
 package com.sedatram.view.vehicle.owner.legal;
+import javax.swing.JOptionPane;
+
 import com.sedatram.controller.VehicleController;
 import com.sedatram.model.Person;
 import com.sedatram.model.Vehicle;
@@ -6,14 +8,14 @@ import com.sedatram.utils.NumbersUtil;
 import com.sedatram.utils.StringsUtil;
 import com.sedatram.view.abstract_view.DetailAbstract;
 import com.sedatram.view.abstract_view.MainAbstract;
-import com.sedatram.view.customer.legal.CELegalCustomer;
-import com.sedatram.view.customer.legal.DetailDataPanelLegalCustomer;
-
-import javax.swing.*;
 
 public class DetailLegalOwner extends DetailAbstract<Person> {
 
-    private Vehicle vehicle;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Vehicle vehicle;
 
     public DetailLegalOwner(
             MainAbstract<Person> parent, Person person, Vehicle vehicle) {

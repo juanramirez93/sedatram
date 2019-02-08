@@ -21,7 +21,11 @@ import java.util.ArrayList;
 
 public class DataPanelLegalCustomer extends DataPanelAbstract<Person> {
 
-    private JComboBox<String> typeDocumentBox;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JComboBox<String> typeDocumentBox;
     private JTextField identificationField;
     private JTextField nameField;
     private JTextField acronymField;
@@ -77,7 +81,6 @@ public class DataPanelLegalCustomer extends DataPanelAbstract<Person> {
 
             @Override
             public void focusLost(FocusEvent e) {
-                boolean valid;
                 String iden = identificationField.getText();
                 iden = iden.replaceAll("\\.", "");
                 iden = iden.replaceAll("-", "");

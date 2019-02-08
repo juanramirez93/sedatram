@@ -8,7 +8,12 @@ import com.sedatram.view.abstract_view.MainAbstract;
 
 public class CEFormality extends CEAbstract<Formality> {
 
-    protected CEFormality(MainAbstract<Formality> parent,
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	protected CEFormality(MainAbstract<Formality> parent,
             Formality formality) {
         super(parent, StringsUtil.FORMALITY, formality);
         setSize(NumbersUtil.FORMALITY_WIDTH, NumbersUtil.FORMALITY_HEIGHT);
@@ -16,11 +21,11 @@ public class CEFormality extends CEAbstract<Formality> {
     }
 
     @Override
-    public void setDataPanel(Formality formality) {
-        dataPanel = new DataPanelFormality(formality);
+    public void saveAction() {
     }
 
     @Override
-    public void saveAction() {
+    public void setDataPanel(Formality formality) {
+        dataPanel = new DataPanelFormality(formality);
     }
 }

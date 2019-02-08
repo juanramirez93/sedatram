@@ -1,13 +1,21 @@
 package com.sedatram.view.general;
-import com.sedatram.controller.SessionController;
+import java.awt.FlowLayout;
+import java.awt.Font;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
 import com.sedatram.utils.StringsUtil;
 import com.sedatram.utils.Utils;
 
-import javax.swing.*;
-import java.awt.*;
-
 public class HeaderPanel extends JPanel {
-    private JLabel imagePanel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JLabel imagePanel;
     private JLabel titlePanel;
 
     public HeaderPanel() {
@@ -25,13 +33,13 @@ public class HeaderPanel extends JPanel {
         this.add(this.titlePanel);
     }
 
-    private void setImage() {
-        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/img/logo.jpg"));
-        imagePanel.setIcon(imageIcon);
-    }
-
     private void initializeVariables() {
         this.imagePanel = new JLabel();
         this.titlePanel = new JLabel(StringsUtil.TITLE);
+    }
+
+    private void setImage() {
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/img/logo.jpg"));
+        imagePanel.setIcon(imageIcon);
     }
 }

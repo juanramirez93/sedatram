@@ -16,7 +16,11 @@ import java.awt.event.FocusListener;
 import java.util.ArrayList;
 
 public class DataPanelLegalOwner extends DataPanelAbstract<Person> {
-    private CELegalOwner parent;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private CELegalOwner parent;
     private JComboBox<String> typeDocumentBox;
     private JTextField identificationField;
     private JTextField nameField;
@@ -25,21 +29,6 @@ public class DataPanelLegalOwner extends DataPanelAbstract<Person> {
     public DataPanelLegalOwner(Person data, CELegalOwner parent) {
         super(data);
         this.parent = parent;
-    }
-
-    @Override
-    protected void setLabelArray() {
-        for(String s : StringsUtil.LEGAL_OWNER_FIELDS) {
-            labelArray.add(new JLabel(s));
-        }
-    }
-
-    @Override
-    protected void setComponentArray() {
-        componentArray.add(typeDocumentBox);
-        componentArray.add(identificationField);
-        componentArray.add(nameField);
-        componentArray.add(acronymField);
     }
 
     @Override
@@ -115,6 +104,16 @@ public class DataPanelLegalOwner extends DataPanelAbstract<Person> {
     }
 
     @Override
+    public void fillData() {
+        if(data.getIdentification() != null) {
+            typeDocumentBox.setSelectedItem(data.getTypeDocument());
+            identificationField.setText(String.valueOf(data.getIdentification()));
+            nameField.setText(data.getFirstName());
+            acronymField.setText(data.getAcronym());
+        }
+    }
+
+    @Override
     public boolean saveData() {
         ArrayList<Component> error = new ArrayList<>();
         if(typeDocumentBox.getSelectedItem().equals("")) {
@@ -150,12 +149,17 @@ public class DataPanelLegalOwner extends DataPanelAbstract<Person> {
     }
 
     @Override
-    public void fillData() {
-        if(data.getIdentification() != null) {
-            typeDocumentBox.setSelectedItem(data.getTypeDocument());
-            identificationField.setText(String.valueOf(data.getIdentification()));
-            nameField.setText(data.getFirstName());
-            acronymField.setText(data.getAcronym());
+    protected void setComponentArray() {
+        componentArray.add(typeDocumentBox);
+        componentArray.add(identificationField);
+        componentArray.add(nameField);
+        componentArray.add(acronymField);
+    }
+
+    @Override
+    protected void setLabelArray() {
+        for(String s : StringsUtil.LEGAL_OWNER_FIELDS) {
+            labelArray.add(new JLabel(s));
         }
     }
 }

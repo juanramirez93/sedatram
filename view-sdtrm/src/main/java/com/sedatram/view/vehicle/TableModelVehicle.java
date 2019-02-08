@@ -3,7 +3,12 @@ import com.sedatram.model.Vehicle;
 import com.sedatram.view.abstract_view.TableModelAbstract;
 
 public class TableModelVehicle extends TableModelAbstract<Vehicle> {
-    public TableModelVehicle(String[] columns) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public TableModelVehicle(String[] columns) {
         super(columns);
     }
 

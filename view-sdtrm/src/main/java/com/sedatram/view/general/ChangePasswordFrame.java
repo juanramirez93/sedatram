@@ -1,18 +1,30 @@
 package com.sedatram.view.general;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.WindowConstants;
+
 import com.sedatram.controller.SessionController;
 import com.sedatram.controller.UserController;
 import com.sedatram.model.User;
 import com.sedatram.utils.NumbersUtil;
 import com.sedatram.utils.StringsUtil;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 public class ChangePasswordFrame extends JFrame implements ActionListener {
 
-    private JLabel oldPassLabel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JLabel oldPassLabel;
     private JLabel newPassLabel;
     private JLabel confirmPassLabel;
     private JPasswordField oldPassField;
@@ -28,6 +40,37 @@ public class ChangePasswordFrame extends JFrame implements ActionListener {
         initialize();
         initializeVariables();
         initializeLayout();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        if(actionEvent.getSource().equals(changeButton)) {
+            changePassword();
+        }
+    }
+
+    private void changePassword() {
+        User user = SessionController.getInstance().getUserSession();
+        if(StringsUtil.verifyPassword(oldPassField.getPassword(),
+                user.getPassword().toCharArray())) {
+            if(StringsUtil
+                    .verifyPassword(newPassField.getPassword(), confirmPassField.getPassword())) {
+                user.setPassword(String.valueOf(newPassField.getPassword()));
+                UserController.getInstance().save(user);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, StringsUtil.NOT_SAME);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, StringsUtil.ENTER_DENIED);
+            oldPassField.setText("");
+        }
+    }
+
+    private void initialize() {
+        setSize(NumbersUtil.PASSWORD_WIDTH, NumbersUtil.PASSWORD_HEIGHT);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
     }
 
     private void initializeLayout() {
@@ -62,36 +105,5 @@ public class ChangePasswordFrame extends JFrame implements ActionListener {
         dataPanel = new JPanel();
         changeButton = new JButton(StringsUtil.CHANGE_PASS);
         changeButton.addActionListener(this);
-    }
-
-    private void initialize() {
-        setSize(NumbersUtil.PASSWORD_WIDTH, NumbersUtil.PASSWORD_HEIGHT);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        if(actionEvent.getSource().equals(changeButton)) {
-            changePassword();
-        }
-    }
-
-    private void changePassword() {
-        User user = SessionController.getInstance().getUserSession();
-        if(StringsUtil.verifyPassword(oldPassField.getPassword(),
-                user.getPassword().toCharArray())) {
-            if(StringsUtil
-                    .verifyPassword(newPassField.getPassword(), confirmPassField.getPassword())) {
-                user.setPassword(String.valueOf(newPassField.getPassword()));
-                UserController.getInstance().save(user);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, StringsUtil.NOT_SAME);
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, StringsUtil.ENTER_DENIED);
-            oldPassField.setText("");
-        }
     }
 }

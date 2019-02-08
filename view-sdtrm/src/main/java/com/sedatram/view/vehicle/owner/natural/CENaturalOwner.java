@@ -1,5 +1,4 @@
 package com.sedatram.view.vehicle.owner.natural;
-import com.sedatram.controller.VehicleController;
 import com.sedatram.model.Person;
 import com.sedatram.model.Vehicle;
 import com.sedatram.utils.NumbersUtil;
@@ -9,18 +8,17 @@ import com.sedatram.view.abstract_view.MainAbstract;
 
 public class CENaturalOwner extends CEAbstract<Person> {
 
-    public Vehicle vehicle;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public Vehicle vehicle;
 
     public CENaturalOwner(MainAbstract<Person> parent, Person person, Vehicle vehicle) {
         super(parent, StringsUtil.OWNER, person);
         this.vehicle = vehicle;
         setSize(NumbersUtil.OWNER_NAT_WIDTH, NumbersUtil.OWNER_NAT_HEIGHT);
         setLocationRelativeTo(null);
-    }
-
-    @Override
-    public void setDataPanel(Person person) {
-        dataPanel = new DataPanelNaturalOwner(person, this);
     }
 
     @Override
@@ -31,5 +29,10 @@ public class CENaturalOwner extends CEAbstract<Person> {
             }
             this.setVisible(false);
         }
+    }
+
+    @Override
+    public void setDataPanel(Person person) {
+        dataPanel = new DataPanelNaturalOwner(person, this);
     }
 }

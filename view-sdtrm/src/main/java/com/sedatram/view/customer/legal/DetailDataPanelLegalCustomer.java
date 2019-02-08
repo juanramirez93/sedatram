@@ -13,7 +13,11 @@ import java.awt.event.ActionListener;
 public class DetailDataPanelLegalCustomer extends DataPanelAbstract<Person> implements
         ActionListener {
 
-    private JTextField typeDocumentBox;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JTextField typeDocumentBox;
     private JTextField identificationField;
     private JTextField nameField;
     private JTextField acronymField;
@@ -38,26 +42,10 @@ public class DetailDataPanelLegalCustomer extends DataPanelAbstract<Person> impl
     }
 
     @Override
-    protected void setLabelArray() {
-        for(String s : StringsUtil.LEGAL_CUSTOMER_FIELDS) {
-            labelArray.add(new JLabel(s));
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource().equals(sendEmailButton)) {
+            Utils.sendEmail(data.getEmail());
         }
-    }
-
-    @Override
-    protected void setComponentArray() {
-        componentArray.add(typeDocumentBox);
-        componentArray.add(identificationField);
-        componentArray.add(nameField);
-        componentArray.add(acronymField);
-        componentArray.add(emailPanel);
-        componentArray.add(phoneField);
-        componentArray.add(cellphoneField);
-        componentArray.add(addressField);
-        componentArray.add(cityField);
-        componentArray.add(departmentField);
-        componentArray.add(managerPanel);
-        componentArray.add(contactPanel);
     }
 
     @Override
@@ -122,11 +110,6 @@ public class DetailDataPanelLegalCustomer extends DataPanelAbstract<Person> impl
     }
 
     @Override
-    public boolean saveData() {
-        return false;
-    }
-
-    @Override
     public void fillData() {
         typeDocumentBox.setText(data.getTypeDocument());
         identificationField.setText(String.valueOf(data.getIdentification()));
@@ -145,9 +128,30 @@ public class DetailDataPanelLegalCustomer extends DataPanelAbstract<Person> impl
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource().equals(sendEmailButton)) {
-            Utils.sendEmail(data.getEmail());
+    public boolean saveData() {
+        return false;
+    }
+
+    @Override
+    protected void setComponentArray() {
+        componentArray.add(typeDocumentBox);
+        componentArray.add(identificationField);
+        componentArray.add(nameField);
+        componentArray.add(acronymField);
+        componentArray.add(emailPanel);
+        componentArray.add(phoneField);
+        componentArray.add(cellphoneField);
+        componentArray.add(addressField);
+        componentArray.add(cityField);
+        componentArray.add(departmentField);
+        componentArray.add(managerPanel);
+        componentArray.add(contactPanel);
+    }
+
+    @Override
+    protected void setLabelArray() {
+        for(String s : StringsUtil.LEGAL_CUSTOMER_FIELDS) {
+            labelArray.add(new JLabel(s));
         }
     }
 }

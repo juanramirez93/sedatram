@@ -1,12 +1,17 @@
 package com.sedatram.view.abstract_view;
 
-import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.table.AbstractTableModel;
+
 public abstract class TableModelAbstract<T> extends AbstractTableModel {
 
-    private int colCount;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int colCount;
     protected List<T> tList;
     private String[] columns;
 
@@ -16,14 +21,9 @@ public abstract class TableModelAbstract<T> extends AbstractTableModel {
         tList = new ArrayList<>();
     }
 
-    public void setList(List<T> ts) {
-        tList = ts;
-    }
-
-    public abstract Object getValueAt(int rowIndex, int columnIndex);
-
-    public void updateTable() {
-        fireTableDataChanged();
+    @Override
+    public int getColumnCount() {
+        return colCount;
     }
 
     @Override
@@ -31,13 +31,8 @@ public abstract class TableModelAbstract<T> extends AbstractTableModel {
         return columns[column];
     }
 
-    @Override
-    public int getColumnCount() {
-        return colCount;
-    }
-
-    public T getSelected(int selectedRow) {
-        return tList.get(selectedRow);
+    public List<T> getList() {
+        return tList;
     }
 
     @Override
@@ -45,7 +40,18 @@ public abstract class TableModelAbstract<T> extends AbstractTableModel {
         return tList.size();
     }
 
-    public List<T> getList() {
-        return tList;
+    public T getSelected(int selectedRow) {
+        return tList.get(selectedRow);
+    }
+
+    @Override
+	public abstract Object getValueAt(int rowIndex, int columnIndex);
+
+    public void setList(List<T> ts) {
+        tList = ts;
+    }
+
+    public void updateTable() {
+        fireTableDataChanged();
     }
 }

@@ -1,12 +1,21 @@
 package com.sedatram.view.abstract_view;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.ArrayList;
+
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public abstract class DataPanelAbstract<T> extends JPanel {
 
-    protected ArrayList<JLabel> labelArray;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected ArrayList<JLabel> labelArray;
     protected ArrayList<JComponent> componentArray;
     protected T data;
 
@@ -20,6 +29,10 @@ public abstract class DataPanelAbstract<T> extends JPanel {
         fillData();
         printLayout();
     }
+
+    protected abstract void defineFields();
+
+    public abstract void fillData();
 
     private void initializeVariables() {
         labelArray = new ArrayList<>();
@@ -56,13 +69,9 @@ public abstract class DataPanelAbstract<T> extends JPanel {
         updateUI();
     }
 
-    protected abstract void setLabelArray();
+    public abstract boolean saveData();
 
     protected abstract void setComponentArray();
 
-    protected abstract void defineFields();
-
-    public abstract boolean saveData();
-
-    public abstract void fillData();
+    protected abstract void setLabelArray();
 }

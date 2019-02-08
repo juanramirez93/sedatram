@@ -6,16 +6,21 @@ import javax.swing.table.TableColumnModel;
 
 public class TableOwner extends TableAbstract<Person> {
 
-    @Override
-    protected void setModel() {
-        model = new TableModelOwner();
-        table.setModel(model);
-    }
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    @Override
+	@Override
     public void setColumnLayout() {
         TableColumnModel columnModel = table.getColumnModel();
         columnModel.getColumn(0).setPreferredWidth(80);
         columnModel.getColumn(1).setPreferredWidth(200);
+    }
+
+    @Override
+    protected void setModel() {
+        model = new TableModelOwner();
+        table.setModel(model);
     }
 }

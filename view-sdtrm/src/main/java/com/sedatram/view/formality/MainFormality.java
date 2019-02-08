@@ -8,41 +8,14 @@ import com.sedatram.view.abstract_view.MainAbstract;
 
 public class MainFormality extends MainAbstract<Formality> {
 
-    public MainFormality() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public MainFormality() {
         super(StringsUtil.FORMALITY);
         initialize();
-    }
-
-    private void initialize() {
-        refreshTable(FormalityController.getInstance().getAll());
-        setSize(NumbersUtil.MAIN_FORMALITY_WIDTH, NumbersUtil.MAIN_FORMALITY_HEIGHT);
-        setLocationRelativeTo(null);
-    }
-
-    @Override
-    protected void setTable() {
-        table = new TableFormality();
-    }
-
-    @Override
-    protected void setSearch() {
-        search = new SearchFormality(this);
-    }
-
-    @Override
-    protected void exportAction() {
-    }
-
-    @Override
-    protected void deleteAction() {
-    }
-
-    @Override
-    protected void editAction() {
-    }
-
-    @Override
-    protected void detailAction() {
     }
 
     @Override
@@ -52,5 +25,37 @@ public class MainFormality extends MainAbstract<Formality> {
         }
         ceFrame = new CEFormality(this, new Formality());
         ceFrame.setVisible(true);
+    }
+
+    @Override
+    protected void deleteAction() {
+    }
+
+    @Override
+    protected void detailAction() {
+    }
+
+    @Override
+    protected void editAction() {
+    }
+
+    @Override
+    protected void exportAction() {
+    }
+
+    private void initialize() {
+        refreshTable(FormalityController.getInstance().getAll());
+        setSize(NumbersUtil.MAIN_FORMALITY_WIDTH, NumbersUtil.MAIN_FORMALITY_HEIGHT);
+        setLocationRelativeTo(null);
+    }
+
+    @Override
+    protected void setSearch() {
+        search = new SearchFormality(this);
+    }
+
+    @Override
+    protected void setTable() {
+        table = new TableFormality();
     }
 }

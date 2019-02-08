@@ -1,17 +1,26 @@
 package com.sedatram.view.abstract_view;
 
-import com.sedatram.utils.NumbersUtil;
-import com.sedatram.utils.StringsUtil;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import com.sedatram.utils.NumbersUtil;
+import com.sedatram.utils.StringsUtil;
+
 public abstract class SearchAbstract<T> extends JPanel implements ActionListener {
 
-    protected JLabel searchLabel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected JLabel searchLabel;
     protected JTextField searchField;
     protected JButton searchButton;
     protected JButton cancelButton;
@@ -28,14 +37,17 @@ public abstract class SearchAbstract<T> extends JPanel implements ActionListener
 
     }
 
-    private void initializeVariables() {
-        searchLabel = new JLabel(StringsUtil.SEARCH);
-        searchField = new JTextField(NumbersUtil.SEARCH_FIELD);
-        searchButton = new JButton(StringsUtil.SEARCH);
-        searchButton.addActionListener(this);
-        cancelButton = new JButton("X");
-        cancelButton.addActionListener(this);
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == searchButton) {
+            search();
+        } else if(e.getSource() == cancelButton) {
+            searchField.setText("");
+            search();
+        }
     }
+
+    public abstract List<T> filter(List<T> tList);
 
     private void initializeLayout() {
         if(filterPanel == null) {
@@ -57,19 +69,16 @@ public abstract class SearchAbstract<T> extends JPanel implements ActionListener
         }
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == searchButton) {
-            search();
-        } else if(e.getSource() == cancelButton) {
-            searchField.setText("");
-            search();
-        }
+    private void initializeVariables() {
+        searchLabel = new JLabel(StringsUtil.SEARCH);
+        searchField = new JTextField(NumbersUtil.SEARCH_FIELD);
+        searchButton = new JButton(StringsUtil.SEARCH);
+        searchButton.addActionListener(this);
+        cancelButton = new JButton("X");
+        cancelButton.addActionListener(this);
     }
 
     protected abstract void search();
 
     protected abstract void setFilterPanel();
-
-    public abstract List<T> filter(List<T> tList);
 }

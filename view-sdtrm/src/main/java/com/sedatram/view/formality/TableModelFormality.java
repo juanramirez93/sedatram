@@ -5,7 +5,12 @@ import com.sedatram.view.abstract_view.TableModelAbstract;
 
 public class TableModelFormality extends TableModelAbstract<Formality> {
 
-    public TableModelFormality(String[] columns) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public TableModelFormality(String[] columns) {
         super(columns);
     }
 

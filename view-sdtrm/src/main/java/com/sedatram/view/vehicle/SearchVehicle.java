@@ -1,16 +1,26 @@
 package com.sedatram.view.vehicle;
+import java.util.List;
+
 import com.sedatram.controller.VehicleController;
 import com.sedatram.model.Vehicle;
 import com.sedatram.view.abstract_view.MainAbstract;
 import com.sedatram.view.abstract_view.SearchAbstract;
 
-import java.util.List;
-
 public class SearchVehicle extends SearchAbstract<Vehicle> {
 
-    public SearchVehicle(
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public SearchVehicle(
             MainAbstract<Vehicle> parent) {
         super(parent);
+    }
+
+    @Override
+    public List<Vehicle> filter(List<Vehicle> vehicles) {
+        return null;
     }
 
     @Override
@@ -30,10 +40,5 @@ public class SearchVehicle extends SearchAbstract<Vehicle> {
 
     @Override
     protected void setFilterPanel() {
-    }
-
-    @Override
-    public List<Vehicle> filter(List<Vehicle> vehicles) {
-        return null;
     }
 }

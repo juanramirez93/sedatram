@@ -11,25 +11,17 @@ import javax.swing.*;
 
 public class DetailNaturalOwner extends DetailAbstract<Person> {
 
-    private Vehicle vehicle;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Vehicle vehicle;
 
     public DetailNaturalOwner(MainAbstract<Person> parent, Person person, Vehicle vehicle) {
         super(parent, StringsUtil.OWNER_DETAIL, person);
         this.vehicle = vehicle;
         setSize(NumbersUtil.NAT_OWNER_WIDTH, NumbersUtil.NAT_OWNER_HEIGHT);
         setLocationRelativeTo(null);
-    }
-
-    @Override
-    public void setDataPanel(Person person) {
-        dataPanel = new DetailDataPanelNaturalOwner(person);
-    }
-
-    @Override
-    public void editAction() {
-        CENaturalOwner ceNaturalOwner = new CENaturalOwner(null, data, vehicle);
-        ceNaturalOwner.setVisible(true);
-        this.dispose();
     }
 
     @Override
@@ -41,7 +33,19 @@ public class DetailNaturalOwner extends DetailAbstract<Person> {
     }
 
     @Override
+    public void editAction() {
+        CENaturalOwner ceNaturalOwner = new CENaturalOwner(null, data, vehicle);
+        ceNaturalOwner.setVisible(true);
+        this.dispose();
+    }
+
+    @Override
     protected void recordAction() {
         JOptionPane.showMessageDialog(this, StringsUtil.OPTION_NO_AVAILABLE);
+    }
+
+    @Override
+    public void setDataPanel(Person person) {
+        dataPanel = new DetailDataPanelNaturalOwner(person);
     }
 }

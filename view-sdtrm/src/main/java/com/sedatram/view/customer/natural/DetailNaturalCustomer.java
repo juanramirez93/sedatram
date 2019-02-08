@@ -9,22 +9,15 @@ import com.sedatram.view.abstract_view.MainAbstract;
 
 public class DetailNaturalCustomer extends DetailAbstract<Person> {
 
-    public DetailNaturalCustomer(MainAbstract<Person> parent, Person person) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public DetailNaturalCustomer(MainAbstract<Person> parent, Person person) {
         super(parent, StringsUtil.CUSTOMERS, person);
         setSize(NumbersUtil.NAT_CUSTOMER_WIDTH, NumbersUtil.NAT_CUSTOMER_HEIGHT);
         setLocationRelativeTo(null);
-    }
-
-    @Override
-    public void setDataPanel(Person person) {
-        dataPanel = new DetailDataPanelNaturalCustomer(person);
-    }
-
-    @Override
-    public void editAction() {
-        CENaturalCustomer ceCustomer = new CENaturalCustomer(null, data);
-        ceCustomer.setVisible(true);
-        this.dispose();
     }
 
     @Override
@@ -36,7 +29,19 @@ public class DetailNaturalCustomer extends DetailAbstract<Person> {
     }
 
     @Override
+    public void editAction() {
+        CENaturalCustomer ceCustomer = new CENaturalCustomer(null, data);
+        ceCustomer.setVisible(true);
+        this.dispose();
+    }
+
+    @Override
     protected void recordAction() {
         Utils.openDirectory("Cliente\\Natural\\" + data.getIdentification());
+    }
+
+    @Override
+    public void setDataPanel(Person person) {
+        dataPanel = new DetailDataPanelNaturalCustomer(person);
     }
 }

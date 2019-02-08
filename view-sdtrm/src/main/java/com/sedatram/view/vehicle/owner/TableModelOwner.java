@@ -4,7 +4,12 @@ import com.sedatram.utils.StringsUtil;
 import com.sedatram.view.abstract_view.TableModelAbstract;
 
 public class TableModelOwner extends TableModelAbstract<Person> {
-    public TableModelOwner() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public TableModelOwner() {
         super(StringsUtil.TABLE_OWNERS_FIELD);
     }
 

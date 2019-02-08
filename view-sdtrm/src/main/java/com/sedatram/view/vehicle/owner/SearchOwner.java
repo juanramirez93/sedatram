@@ -6,9 +6,19 @@ import com.sedatram.view.abstract_view.SearchAbstract;
 import java.util.List;
 
 public class SearchOwner extends SearchAbstract<Person> {
-    public SearchOwner(
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public SearchOwner(
             MainAbstract<Person> parent) {
         super(parent);
+    }
+
+    @Override
+    public List<Person> filter(List<Person> people) {
+        return null;
     }
 
     @Override
@@ -17,10 +27,5 @@ public class SearchOwner extends SearchAbstract<Person> {
 
     @Override
     protected void setFilterPanel() {
-    }
-
-    @Override
-    public List<Person> filter(List<Person> people) {
-        return null;
     }
 }

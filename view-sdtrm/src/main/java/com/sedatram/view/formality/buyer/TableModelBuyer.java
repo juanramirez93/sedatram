@@ -5,6 +5,11 @@ import com.sedatram.view.abstract_view.TableModelAbstract;
 
 public class TableModelBuyer extends TableModelAbstract<Buyer> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public TableModelBuyer(String[] columns) {
 		super(columns);
 		// TODO Auto-generated constructor stub

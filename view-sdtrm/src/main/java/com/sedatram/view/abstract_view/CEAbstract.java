@@ -7,7 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public abstract class CEAbstract<T> extends JFrame implements ActionListener {
-    protected JButton backButton;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected JButton backButton;
     protected JButton saveButton;
 
     protected JPanel buttonPanel;
@@ -17,7 +21,7 @@ public abstract class CEAbstract<T> extends JFrame implements ActionListener {
 
     protected T data;
 
-    protected CEAbstract(MainAbstract<T> parent, String title, T t) {
+    public CEAbstract(MainAbstract<T> parent, String title, T t) {
         super("Agregar " + title);
         this.parent = parent;
         this.data = t;

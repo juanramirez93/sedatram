@@ -1,16 +1,26 @@
 package com.sedatram.view.formality;
 
+import java.util.List;
+
 import com.sedatram.controller.FormalityController;
 import com.sedatram.model.Formality;
 import com.sedatram.view.abstract_view.MainAbstract;
 import com.sedatram.view.abstract_view.SearchAbstract;
 
-import java.util.List;
-
 public class SearchFormality extends SearchAbstract<Formality> {
 
-    public SearchFormality(MainAbstract<Formality> parent) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public SearchFormality(MainAbstract<Formality> parent) {
         super(parent);
+    }
+
+    @Override
+    public List<Formality> filter(List<Formality> formalities) {
+        return null;
     }
 
     @Override
@@ -31,10 +41,5 @@ public class SearchFormality extends SearchAbstract<Formality> {
 
     @Override
     protected void setFilterPanel() {
-    }
-
-    @Override
-    public List<Formality> filter(List<Formality> formalities) {
-        return null;
     }
 }

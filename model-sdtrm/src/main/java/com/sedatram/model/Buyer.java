@@ -2,6 +2,7 @@ package com.sedatram.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,6 +22,51 @@ public class Buyer {
 	private String address = "";
 	private String city = "";
 	private String department = "";
+	private String createdBy;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+    private String editedBy;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date editedAt;
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getEditedBy() {
+		return editedBy;
+	}
+
+	public void setEditedBy(String editedBy) {
+		this.editedBy = editedBy;
+	}
+
+	public Date getEditedAt() {
+		return editedAt;
+	}
+
+	public void setEditedAt(Date editedAt) {
+		this.editedAt = editedAt;
+	}
+
+	public List<Formality> getProcedures() {
+		return procedures;
+	}
+
+	public void setProcedures(List<Formality> procedures) {
+		this.procedures = procedures;
+	}
 
 	@ManyToMany(mappedBy = "buyers")
 	private List<Formality> procedures = new ArrayList<>();

@@ -18,6 +18,7 @@ import javax.swing.JPasswordField;
 
 import com.sedatram.controller.SessionController;
 import com.sedatram.controller.UserController;
+import com.sedatram.model.Session;
 import com.sedatram.model.User;
 import com.sedatram.utils.NumbersUtil;
 import com.sedatram.utils.StringsUtil;
@@ -56,7 +57,7 @@ public class Auth extends JFrame implements ActionListener, KeyListener {
 		User user = (User) userComboBox.getSelectedItem();
 		if (user != null && StringsUtil.verifyPassword(password.getPassword(), user.getPassword().toCharArray())) {
 			SessionController.getInstance().setUserSession(user);
-			// Session.INSTANCE.setPathFolderDocs(new Config().comprobar());
+			Session.userActive = user;
 			MainFrame mainFrame = new MainFrame();
 			mainFrame.setVisible(true);
 			this.dispose();

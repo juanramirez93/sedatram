@@ -74,7 +74,10 @@ public class StringsUtil {
 	public static final String[] TABLE_COLUMNS_FORMALITY = { "Fecha", "ID Cliente", "Nombre Cliente", "Tipo",
 			"Estado" };
 	public static final String CAPS_ON = "Bloq Mayús activado";
-	public static final String[] FORMALITY_FIELDS = { "Tipo de trámite", "Fecha de inicio", "Cliente", "Vehículo" };
+	public static final String[] FORMALITY_FIELDS = { "Tipo de trámite", "Fecha de inicio", "Cliente", "Vehículo",
+			"Tramitador", "Impuestos", "Derechos de trámite", "Semaforización", "Retención", "Paz y salvo", "Otros",
+			"Servicios tramitador", "Servicios Sedatram", "Envíos", "Total", "Estado del pago", "Estado del trámite",
+			"Fecha final" };
 	public static final String CUSTOMER_DO_NOT_EXIST = "El cliente no existe. ¿Desea crearlo?";
 	public static final String VEHICLE_DO_NOT_EXIST = "El vehículo no existe. ¿Desea crearlo?";
 	public static final String[] TABLE_COLUMNS_BUYER = { "Identificación", "Nombre", "Celular", "e-Mail" };
@@ -82,6 +85,15 @@ public class StringsUtil {
 	public static final String[] NATURAL_BUYER_FIELD = {};
 	public static final String[] LEGAL_BUYER_FIELDS = { "Tipo documento", "Número", "Nombre", "Siglas", "E-mail",
 			"Teléfono", "Celular", "Dirección", "Ciudad", "Departamento" };
+	public static final String[] PAY_STATUS_OPTIONS = { "", "PAGO", "DEBE" };
+	public static final String[] STATUS_OPTIONS = { "", "PROCESO", "FINALIZADO" };
+	public static final String TYPE_FORMALITY = "Tipos de trámites";
+	public static final String[] TYPE_FORMALITY_COLUMNS = { "Tipo", "Vehículo", "Tramitador", "Impuestos",
+			"Derechos de trámite", "Semaforización", "Retención", "Paz y salvo", "Otros", "Servicios tramitador",
+			"Servicios Sedatram", "Envíos", "Total", "Estado del pago", "Estado del trámite", "Fecha final" };
+	public static final String SAVE_CHANGES = "Guardar Cambios";
+	public static final String SURE_DELETE = "Eliminará el registro.¿Desea continuar?";
+	public static final Object NO_TYPE_FORMALITY = "Primero agregue un tipo de trámite";
 
 	public static boolean verifyPassword(char[] passwordString, char[] passwordConfirmString) {
 		if (passwordString.length == passwordConfirmString.length) {

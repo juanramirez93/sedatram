@@ -40,6 +40,7 @@ public abstract class DataPanelAbstract<T> extends JPanel {
     }
 
     protected void printLayout() {
+    	this.removeAll();
         setLayout(new GridBagLayout());
         GridBagConstraints gc = new GridBagConstraints();
         Insets rightPadding = new Insets(0, 0, 0, 15);

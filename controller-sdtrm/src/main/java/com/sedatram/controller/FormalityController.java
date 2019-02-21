@@ -1,12 +1,14 @@
 package com.sedatram.controller;
 
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+
 import com.sedatram.entityManager.EM;
 import com.sedatram.entityManager.EntityManagerHandler;
 import com.sedatram.model.Formality;
+import com.sedatram.model.auxiliar.FormalityHandler;
 import com.sedatram.model.auxiliar.TypeFormality;
-
-import javax.persistence.TypedQuery;
-import java.util.List;
 
 public class FormalityController extends EM {
 
@@ -41,13 +43,18 @@ public class FormalityController extends EM {
 		return query.getResultList();
 	}
 
-	public TypeFormality[] getAllTypes() {
+	public List<TypeFormality> getAllTypes() {
 		open();
 		TypedQuery<TypeFormality> typedQuery = EntityManagerHandler.INSTANCE.getEntityManager()
-				.createQuery("SELECT t" + " FROM TypeFormality t order by t.name", TypeFormality.class);
-		TypeFormality[] typeFormalities = new TypeFormality[typedQuery.getResultList().size()];
+				.createQuery("SELECT t FROM TypeFormality t order by t.name", TypeFormality.class);
+		return typedQuery.getResultList();
+	}
+
+	public TypeFormality[] getAllTypesArray() {
+		List<TypeFormality> formalities = getAllTypes();
+		TypeFormality[] typeFormalities = new TypeFormality[formalities.size()];
 		int i = 0;
-		for (TypeFormality typeFormality : typedQuery.getResultList()) {
+		for (TypeFormality typeFormality : formalities) {
 			typeFormalities[i] = typeFormality;
 			i++;
 		}
@@ -59,5 +66,37 @@ public class FormalityController extends EM {
 		EntityManagerHandler.INSTANCE.getEntityManager().persist(formality);
 		EntityManagerHandler.INSTANCE.getEntityManager().getTransaction().commit();
 
+	}
+
+	public FormalityHandler[] getAllHandlers() {
+		open();
+		TypedQuery<FormalityHandler> typedQuery = EntityManagerHandler.INSTANCE.getEntityManager()
+				.createQuery("SELECT h FROM FormalityHandler h order by h.name", FormalityHandler.class);
+		FormalityHandler[] handlers = new FormalityHandler[typedQuery.getResultList().size()];
+		int i = 0;
+		for (FormalityHandler handler : typedQuery.getResultList()) {
+			handlers[i] = handler;
+			i++;
+		}
+		return handlers;
+	}
+
+	public TypeFormality getType(Object object) {
+		open();
+		TypedQuery<TypeFormality> typedQuery = EntityManagerHandler.INSTANCE.getEntityManager().createQuery(
+				"SELECT t FROM TypeFormality t where t.name = '" + object + "' order by t.name", TypeFormality.class);
+		return typedQuery.getSingleResult();
+	}
+
+	public void saveType(TypeFormality type) {
+		open();
+		EntityManagerHandler.INSTANCE.getEntityManager().persist(type);
+		EntityManagerHandler.INSTANCE.getEntityManager().getTransaction().commit();
+	}
+
+	public void remove(TypeFormality type) {
+		open();
+		EntityManagerHandler.INSTANCE.getEntityManager().remove(type);
+		EntityManagerHandler.INSTANCE.getEntityManager().getTransaction().commit();
 	}
 }

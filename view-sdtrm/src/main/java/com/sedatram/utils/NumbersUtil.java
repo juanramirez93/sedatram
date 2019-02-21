@@ -37,7 +37,7 @@ public class NumbersUtil {
 	public static final int MAIN_FORMALITY_WIDTH = 650;
 	public static final int MAIN_FORMALITY_HEIGHT = 400;
 	public static final int FORMALITY_WIDTH = 500;
-	public static final int FORMALITY_HEIGHT = 500;
+	public static final int FORMALITY_HEIGHT = 700;
 	public static final int FORMALITY_FIELD = 10;
 	public static final int MAIN_BUYER_WIDHT = 500;
 	public static final int MAIN_BUYER_HEIGHT = 450;
